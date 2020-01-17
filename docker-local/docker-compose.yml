@@ -1,14 +1,24 @@
 version: '3.1'
 
 services:
-  database:
+  database_dev:
     image: mysql:5
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: some_secret_password
+      MYSQL_ROOT_PASSWORD: not_secure_at_all
+      MYSQL_DATABASE: gosh_dev
     ports:
       - 3306:3306
     volumes:
       - "../var/mysql:/var/lib/mysql"
+  database_unittest:
+    image: mysql:5
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: not_very_secure
+      MYSQL_DATABASE: gosh_dev
+    ports:
+      - 3307:3306
 
